@@ -12,6 +12,20 @@ The key goals of this template is to provide:
 - Local LWC Development capabilities
 - A starting point for some development best practices
 
+## Trigger Handler Basics
+
+A basic and light-weight trigger handler framework has been brought into this template - [`sfdc-trigger-framework`](https://github.com/kevinohara80/sfdc-trigger-framework).
+
+This has been slightly modified to adhere to the styling and conventions of this template.
+
+This could easily be replaced with your framework of choice, but I think this one is pretty neat.
+
+## Apex Code Formatting Performance
+
+Refer to the `prettier-plugin-apex` documentation on the different options to improve the performance of formatting Apex code locally.
+
+This template uses the `native` parser by default, as this is my preferred option.
+
 ## Using Custom Code Templates
 
 For simplicity, custom code templates have been included locally in this repository.

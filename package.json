@@ -16,6 +16,7 @@
     "precommit": "lint-staged"
   },
   "devDependencies": {
+    "@cparra/apexdocs": "^2.24.0",
     "@lwc/eslint-plugin-lwc": "^1.1.2",
     "@prettier/plugin-xml": "^3.2.2",
     "@salesforce/eslint-config-lwc": "^3.2.3",
