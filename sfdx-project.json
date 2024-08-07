@@ -1,8 +1,16 @@
 {
   "packageDirectories": [
     {
-      "path": "force-app",
+      "path": "packages/core",
       "default": true
+    },
+    {
+      "path": "packages/omnistudio",
+      "default": false
+    },
+    {
+      "path": "packages/omnistudio-post",
+      "default": false
     }
   ],
   "name": "salesforce-project-template",

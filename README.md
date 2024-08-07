@@ -1,6 +1,6 @@
 # Salesforce Project Template
 
-An opinionated Salesforce Project starter-kit. 
+An opinionated Salesforce project starter-kit. 
 
 ## Summary
 The key goals of this template is to provide:
