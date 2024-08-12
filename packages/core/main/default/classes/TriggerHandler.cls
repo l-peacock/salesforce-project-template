@@ -93,31 +93,68 @@ public virtual class TriggerHandler {
     this.setMaxLoopCount(-1);
   }
 
+  /**
+   * @description Add a specific handler to the bypass list
+   * @param handlerName
+   * @return void
+   * @example
+   * MyTriggerHandler.bypass('myHandlerName');
+   */
   public static void bypass(String handlerName) {
     TriggerHandler.bypassedHandlers.add(handlerName);
   }
 
+  /**
+   * @description Remove a specific handler from the bypass list
+   * @param handlerName
+   * @return void
+   * @example
+   * MyTriggerHandler.clearBypass('myHandlerName');
+   */
   public static void clearBypass(String handlerName) {
     TriggerHandler.bypassedHandlers.remove(handlerName);
   }
 
+  /**
+   * @description Helper to check if a specific handler is in the bypass list
+   * @param handlerName
+   * @return Boolean
+   * @example
+   * MyTriggerHandler.isBypassed('myHandlerName');
+   */
   public static Boolean isBypassed(String handlerName) {
     return TriggerHandler.bypassedHandlers.contains(handlerName);
   }
 
+  /**
+   * @description Empties all handlers from the bypass list
+   * @return void
+   * @example
+   * MyTriggerHandler.clearAllBypasses();
+   */
   public static void clearAllBypasses() {
     TriggerHandler.bypassedHandlers.clear();
   }
 
-  /***************************************
-   * private instancemethods
-   ***************************************/
-
+  /**
+   * @description Sets an empty trigger context
+   * @return void
+   * @example
+   * MyTriggerHandler.setTriggerContext();
+   */
   @TestVisible
   private void setTriggerContext() {
     this.setTriggerContext(null, false);
   }
 
+  /**
+   * @description Overrides the trigger context, useful for test methods
+   * @param ctx
+   * @param testMode
+   * @return void
+   * @example
+   * MyTriggerHandler.setTriggerContext('before insert', false);
+   */
   @TestVisible
   private void setTriggerContext(String ctx, Boolean testMode) {
     if (!Trigger.isExecuting && !testMode) {
@@ -172,7 +209,12 @@ public virtual class TriggerHandler {
     }
   }
 
-  // increment the loop count
+  /**
+   * @description Increments the loop count, tracks recursive executions of a trigger
+   * @return void
+   * @example
+   * MyTriggerHandler.addToLoopCount();
+   */
   @TestVisible
   private void addToLoopCount() {
     String handlerName = getHandlerName();
@@ -191,7 +233,12 @@ public virtual class TriggerHandler {
     }
   }
 
-  // make sure this trigger should continue to run
+  /**
+   * @description Validates that a Trigger can continue to run
+   * @return Boolean
+   * @example
+   * MyTriggerHandler.validateRun();
+   */
   @TestVisible
   private Boolean validateRun() {
     if (!this.isTriggerExecuting || this.context == null) {
@@ -202,81 +249,154 @@ public virtual class TriggerHandler {
     return !TriggerHandler.bypassedHandlers.contains(getHandlerName());
   }
 
+  /**
+   * @description Helper to get the name of the currently executing trigger handler (i.e. the class extending `TriggerHandler`)
+   * @return String
+   * @example
+   * MyTriggerHandler.getHandlerName();
+   */
   @TestVisible
   private String getHandlerName() {
     return this.toString().substringBefore(':');
   }
 
-  /***************************************
-   * context methods
-   ***************************************/
+  /**
+   * @description Override this method with the trigger's `before insert` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void beforeInsert() {}
 
-  // context-specific methods for override
+  /**
+   * @description Override this method with the trigger's `before update` logic
+   * @return void
+   */
   @TestVisible
-  protected virtual void beforeInsert() {
-  }
-  @TestVisible
-  protected virtual void beforeUpdate() {
-  }
-  @TestVisible
-  protected virtual void beforeDelete() {
-  }
-  @TestVisible
-  protected virtual void afterInsert() {
-  }
-  @TestVisible
-  protected virtual void afterUpdate() {
-  }
-  @TestVisible
-  protected virtual void afterDelete() {
-  }
-  @TestVisible
-  protected virtual void afterUndelete() {
-  }
+  // prettier-ignore
+  protected virtual void beforeUpdate() {}
 
-  /***************************************
-   * inner classes
-   ***************************************/
+  /**
+   * @description Override this method with the trigger's `before delete` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void beforeDelete() {}
 
-  // inner class for managing the loop count per handler
+  /**
+   * @description Override this method with the trigger's `after insert` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void afterInsert() {}
+
+  /**
+   * @description Override this method with the trigger's `after update` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void afterUpdate() {}
+
+  /**
+   * @description Override this method with the trigger's `after delete` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void afterDelete() {}
+
+  /**
+   * @description Override this method with the trigger's `after undelete` logic
+   * @return void
+   */
+  @TestVisible
+  // prettier-ignore
+  protected virtual void afterUndelete() {}
+
+  /**
+   * @description Inner class for managing the loop count per handler
+   */
   @TestVisible
   private class LoopCount {
     private Integer max;
     private Integer count;
 
+    /**
+     * @constructor
+     */
     public LoopCount() {
       this.max = 5;
       this.count = 0;
     }
 
+    /**
+     * @constructor
+     * @param max
+     */
     public LoopCount(Integer max) {
       this.max = max;
       this.count = 0;
     }
 
+    /**
+     * @description Increments the loop count by one. Returns true if the maximum count has been exceeded.
+     * @return Boolean
+     * @example
+     * LoopCount.increment()
+     */
     public Boolean increment() {
       this.count++;
       return this.exceeded();
     }
 
+    /**
+     * @description Returns true if the maximum count has been exceeded.
+     * @return Boolean
+     * @example
+     * LoopCount.exceeded()
+     */
     public Boolean exceeded() {
       return this.max >= 0 && this.count > this.max;
     }
 
+    /**
+     * @description Returns the maximum loop count allowed
+     * @return Integer
+     * @example
+     * LoopCount.getMax()
+     */
     public Integer getMax() {
       return this.max;
     }
 
+    /**
+     * @description Returns the current loop count
+     * @return Integer
+     * @example
+     * LoopCount.getCount()
+     */
     public Integer getCount() {
       return this.count;
     }
 
+    /**
+     * @description Sets the maximum loop count
+     * @param max
+     * @return void
+     * @example
+     * LoopCount.setMax(2)
+     */
     public void setMax(Integer max) {
       this.max = max;
     }
   }
 
-  // possible trigger contexts
+  /**
+   * @description Defines the possible TriggerContext values
+   */
   @TestVisible
   private enum TriggerContext {
     BEFORE_INSERT,
@@ -288,7 +408,9 @@ public virtual class TriggerHandler {
     AFTER_UNDELETE
   }
 
-  // exception class
+  /**
+   * @description Custom exception for TriggerHandler-specific exceptions
+   */
   public class TriggerHandlerException extends Exception {
   }
 }
