@@ -2,11 +2,11 @@
 layout: default
 ---
 # Classes
-## Sample
+## Class Group
 
-### [MyApexClass](./Sample/MyApexClass.md)
+### [CaseTriggerHandler](./Class-Group/CaseTriggerHandler.md)
 
-MyApexClass
+CaseTriggerHandler
 
 
 ## Trigger
