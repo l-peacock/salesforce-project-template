@@ -32,7 +32,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description This method is the main 'execution' of a trigger. It is responsible for classing the various methods throughout the lifecycle of a trigger.
-   * @return void
    */
   public void run() {
     if (!validateRun()) {
@@ -70,7 +69,6 @@ public virtual class TriggerHandler {
   /**
    * @description Configure a maximum 'recursion' for a trigger
    * @param max The maximum number of recursions allowed
-   * @return void
    * @example
    * MyTriggerHandler.setMaxLoopCount(1);
    */
@@ -85,7 +83,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Remove the maximum 'recursion' for a trigger
-   * @return void
    * @example
    * MyTriggerHandler.clearMaxLoopCount();
    */
@@ -96,7 +93,6 @@ public virtual class TriggerHandler {
   /**
    * @description Add a specific handler to the bypass list
    * @param handlerName
-   * @return void
    * @example
    * MyTriggerHandler.bypass('myHandlerName');
    */
@@ -107,7 +103,7 @@ public virtual class TriggerHandler {
   /**
    * @description Remove a specific handler from the bypass list
    * @param handlerName
-   * @return void
+
    * @example
    * MyTriggerHandler.clearBypass('myHandlerName');
    */
@@ -128,7 +124,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Empties all handlers from the bypass list
-   * @return void
    * @example
    * MyTriggerHandler.clearAllBypasses();
    */
@@ -138,7 +133,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Sets an empty trigger context
-   * @return void
    * @example
    * MyTriggerHandler.setTriggerContext();
    */
@@ -151,7 +145,6 @@ public virtual class TriggerHandler {
    * @description Overrides the trigger context, useful for test methods
    * @param ctx
    * @param testMode
-   * @return void
    * @example
    * MyTriggerHandler.setTriggerContext('before insert', false);
    */
@@ -211,7 +204,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Increments the loop count, tracks recursive executions of a trigger
-   * @return void
    * @example
    * MyTriggerHandler.addToLoopCount();
    */
@@ -262,7 +254,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `before insert` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -270,7 +261,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `before update` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -278,7 +268,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `before delete` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -286,7 +275,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `after insert` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -294,7 +282,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `after update` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -302,7 +289,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `after delete` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -310,7 +296,6 @@ public virtual class TriggerHandler {
 
   /**
    * @description Override this method with the trigger's `after undelete` logic
-   * @return void
    */
   @TestVisible
   // prettier-ignore
@@ -385,7 +370,6 @@ public virtual class TriggerHandler {
     /**
      * @description Sets the maximum loop count
      * @param max
-     * @return void
      * @example
      * LoopCount.setMax(2)
      */
