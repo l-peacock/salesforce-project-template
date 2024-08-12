@@ -1,0 +1,27 @@
+# This workflow will automatically generate and commit ApexDocs to the `/docs/` directory
+# to be served on GitHub Pages
+
+name: apexdocs
+
+on:
+  push:
+    branches: [ "main" ] 
+
+permissions:
+  contents: write
+
+jobs:
+  generate-apex-docs:
+    permissions:
+      contents: write # for the action to checkout, and commit generated documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+        node-version: 18
+      - run: npm i -g @cparra/apexdocs
+      - run: rm -rf docs
+      - run: apexdocs-generate -s packages/core/main/default/classes -t docs -r -p global public
+      - run: git commit -m '🤖 Automated Documentation' -- docs
+      - run: git push
