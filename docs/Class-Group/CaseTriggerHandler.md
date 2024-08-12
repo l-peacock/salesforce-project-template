@@ -32,12 +32,6 @@ CaseTriggerHandler
 
 This method is the main 'execution' of a trigger. It is responsible for classing the various methods throughout the lifecycle of a trigger.
 
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
-
 ### `public void setMaxLoopCount(Integer max)`
 
 *Inherited*
@@ -51,12 +45,6 @@ Configure a maximum 'recursion' for a trigger
 |---|---|
 |`max`|The maximum number of recursions allowed|
 
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
-
 #### Example
 ```apex
 MyTriggerHandler.setMaxLoopCount(1);
@@ -69,12 +57,6 @@ MyTriggerHandler.setMaxLoopCount(1);
 
 
 Remove the maximum 'recursion' for a trigger
-
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
 
 #### Example
 ```apex
@@ -95,12 +77,6 @@ Add a specific handler to the bypass list
 |---|---|
 |`handlerName`||
 
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
-
 #### Example
 ```apex
 MyTriggerHandler.bypass('myHandlerName');
@@ -119,12 +95,6 @@ Remove a specific handler from the bypass list
 |Param|Description|
 |---|---|
 |`handlerName`||
-
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
 
 #### Example
 ```apex
@@ -163,12 +133,6 @@ MyTriggerHandler.isBypassed('myHandlerName');
 
 
 Empties all handlers from the bypass list
-
-#### Returns
-
-|Type|Description|
-|---|---|
-|`void`|void|
 
 #### Example
 ```apex
