@@ -26,15 +26,29 @@ jobs:
         run: npm i -g @cparra/apexdocs
       - name: Re-generate Apexdocs
         run: |
+          # Clean-up existing Apex docs
           rm -rf docs
+          # Re-generate the documentation
           apexdocs-generate -s packages/core/main/default/classes -t docs -r -p global public
       - name: Commit new documentation
         run: |
+          # Configure the GitHub actions agent's Git identity
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Switch to the docs branch, where documentation is served from
           git fetch
           git switch docs
           git pull
+
+          # Stage any documentation changes
           git add docs
-          git commit -m "🤖 Automated Documentation"
-          git push
+
+          if [[ `git status --porcelain` ]]; then
+            # If there are changes, commit and push
+            git commit -m "🤖 Automated Documentation"
+            git push
+          else
+            # If there are no changes, do nothing
+            echo No documentation changes to commit
+          fi
