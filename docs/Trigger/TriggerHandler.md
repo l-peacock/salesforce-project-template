@@ -14,7 +14,7 @@ TriggerHandler Virtual Class
 ## Constructors
 ### `public TriggerHandler()`
 
-**Constructor** TriggerHandler
+Constructor to instantiate a trigger handler
 
 ---
 ## Methods
