@@ -1,0 +1,14 @@
+name: Install sf cli
+
+description: Installs the sf cli globally for the agent to utilise
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install sf cli
+      shell: bash
+      run: |
+        npm install @salesforce/cli --location=global
+        nodeInstallPath=$(npm config get prefix)
+        echo "$nodeInstallPath/bin" >> $GITHUB_PATH
+        sf --version

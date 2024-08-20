@@ -1,0 +1,32 @@
+# Validates metadata in the pull request against a scratch org
+
+name: Validate to Scratch Org
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+
+jobs:
+  validate-to-scratch-org:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repo
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      # Install the SF CLI
+      - name: Install sf cli
+        uses: ./.github/actions/install-sf-cli
+
+      # Validate to a scratch org
+      - name: Validate to Scratch Org
+        uses: ./.github/actions/validate-to-scratch-org
+        with:
+          devhub-auth-url: ${{ secrets.DEVHUB_AUTH_URL }}
+      
+      # Cleanup Scratch Org regardless of outcome (success,failure)
+      - name: Cleanup Scratch Org
+        if: '!cancelled()'
+        uses: ./.github/actions/clean-up-scratch-org # After the validation has completed, always delete the scratch org
+
