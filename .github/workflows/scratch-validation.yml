@@ -21,8 +21,10 @@ jobs:
 
       # Validate to a scratch org
       - name: Validate to Scratch Org
-        uses: ./.github/actions/with-post-step
-        with:
-          main: ./.github/actions/validate-to-scratch-org
-          post: ./.github/actions/clean-up-scratch-org # After the validation has completed, always delete the scratch org
+        uses: ./.github/actions/validate-to-scratch-org
+      
+      # Cleanup Scratch Org regardless of outcome (success,failure)
+      - name: Cleanup Scratch Org
+        if: '!cancelled()'
+        uses: ./.github/actions/clean-up-scratch-org # After the validation has completed, always delete the scratch org
 
