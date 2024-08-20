@@ -13,5 +13,5 @@ trigger CaseTrigger on Case(
   after undelete
 ) {
   // Execute Trigger logic via the Trigger Handler framework
-  new CaseTriggerHandler().run();
+  CaseTriggerHandler.run();
 }
