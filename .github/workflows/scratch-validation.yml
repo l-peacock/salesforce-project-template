@@ -17,7 +17,7 @@ jobs:
 
       # Install the SF CLI
       - name: Install sf cli
-        uses: ./github/actions/install-sf-cli
+        uses: ./.github/actions/install-sf-cli
 
       # Validate to a scratch org
       - name: Validate to Scratch Org
