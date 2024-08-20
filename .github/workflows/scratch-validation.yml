@@ -11,11 +11,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Install Salesforce CLI"
-            run: |
-              npm install @salesforce/cli --location=global
-              nodeInstallPath=$(npm config get prefix)
-              echo "$nodeInstallPath/bin" >> $GITHUB_PATH
-              sf --version
+                run: |
+                npm install @salesforce/cli --location=global
+                nodeInstallPath=$(npm config get prefix)
+                echo "$nodeInstallPath/bin" >> $GITHUB_PATH
+                sf --version
 
             - name: "Checkout source code"
                 uses: actions/checkout@v3
