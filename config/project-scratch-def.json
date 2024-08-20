@@ -1,13 +1,4 @@
 {
   "orgName": "Peacock Corp",
-  "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
-  "settings": {
-    "lightningExperienceSettings": {
-      "enableS1DesktopEnabled": true
-    },
-    "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
-    }
-  }
+  "sourceOrg": "00DQE000000Y1Uj2AK"
 }

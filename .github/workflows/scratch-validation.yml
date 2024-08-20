@@ -1,0 +1,35 @@
+# Validates metadata in the pull request against a scratch org
+
+name: Validate to Scratch Org
+
+on:
+    pull_request:
+      types: [opened, synchronize]
+
+jobs:
+    validate-to-scratch-org:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Install Salesforce CLI"
+            run: |
+              npm install @salesforce/cli --location=global
+              nodeInstallPath=$(npm config get prefix)
+              echo "$nodeInstallPath/bin" >> $GITHUB_PATH
+              sf --version
+
+            - name: "Checkout source code"
+                uses: actions/checkout@v3
+
+            - name: "Extract Auth URL secret""
+                shell: bash
+                run: "echo ${{ secrets.DEVHUB_AUTH_URL}} > ./SFDX_URL_STORE.txt"
+
+            - name: "Authenticate with DevHub"
+                run: sf org login sfdx-url -f ./SFDX_URL_STORE.txt -a devhub -d
+
+            - name: "Create Scratch org"
+                run: "sf org create scratch -d -f config/project-scratch-def.json -a scratch-validate --duration-days 1"
+
+            - name: "Validate Metadata"
+                run: "sf project deploy start --dry-run -d packages/core --target-org scratch-validate"
+              
