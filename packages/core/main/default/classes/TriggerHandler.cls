@@ -24,7 +24,7 @@ public virtual class TriggerHandler {
   }
 
   /**
-   * @constructor TriggerHandler
+   * @description Constructor to instantiate a trigger handler
    */
   public TriggerHandler() {
     this.setTriggerContext();
@@ -310,7 +310,7 @@ public virtual class TriggerHandler {
     private Integer count;
 
     /**
-     * @constructor
+     * @description Constructor to instantiate a LoopCount with the default maximum of 5
      */
     public LoopCount() {
       this.max = 5;
@@ -318,7 +318,7 @@ public virtual class TriggerHandler {
     }
 
     /**
-     * @constructor
+     * @description Constructor to instantiate a LoopCount with a maximum value
      * @param max
      */
     public LoopCount(Integer max) {
