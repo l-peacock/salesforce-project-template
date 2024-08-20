@@ -2,12 +2,19 @@ name: Validate to Scratch Org
 
 description: Generates and validates the metadata to a Scratch Org using the defined `validation` snapshot in the DevHub
 
+inputs:
+  devhub-auth-url:
+    description: "The DevHub Auth URL to use"
+    required: true
+
 runs:
   using: "composite"
   steps:
     - name: Extract Auth URL secret
       shell: bash
-      run: "echo ${{ secrets.DEVHUB_AUTH_URL}} > ./SFDX_URL_STORE.txt"
+      run: "echo $DEVHUB_AUTH_URL > ./SFDX_URL_STORE.txt"
+      env:
+        DEVHUB_AUTH_URL: ${{ inputs.devhub-auth-url }}
     - name: Authenticate with DevHub
       shell: bash
       run: sf org login sfdx-url -f ./SFDX_URL_STORE.txt -a devhub -d

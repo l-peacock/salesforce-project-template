@@ -22,6 +22,8 @@ jobs:
       # Validate to a scratch org
       - name: Validate to Scratch Org
         uses: ./.github/actions/validate-to-scratch-org
+        with:
+          devhub-auth-url: ${{ secrets.DEVHUB_AUTH_URL }}
       
       # Cleanup Scratch Org regardless of outcome (success,failure)
       - name: Cleanup Scratch Org

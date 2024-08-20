@@ -12,4 +12,5 @@ runs:
   using: "composite"
   steps:
     - name: Delete Scratch Org
+      shell: bash
       run: sf org delete scratch --target-org scratch-validate --no-prompt
