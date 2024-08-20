@@ -1,0 +1,15 @@
+name: Clean Up Scratch Org
+
+description: Deletes the validation scratch org after validation has completed
+
+inputs:
+  alias-to-delete:
+    description: "Alias of the scratch org to delete"
+    required: true
+    default: "scratch-validate"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Delete Scratch Org
+      run: sf org delete scratch --target-org scratch-validate --no-prompt

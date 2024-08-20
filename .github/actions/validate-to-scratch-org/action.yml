@@ -1,0 +1,19 @@
+name: Validate to Scratch Org
+
+description: Generates and validates the metadata to a Scratch Org using the defined `validation` snapshot in the DevHub
+
+runs:
+  using: "composite"
+  steps:
+    - name: Extract Auth URL secret
+      shell: bash
+      run: "echo ${{ secrets.DEVHUB_AUTH_URL}} > ./SFDX_URL_STORE.txt"
+    - name: Authenticate with DevHub
+      shell: bash
+      run: sf org login sfdx-url -f ./SFDX_URL_STORE.txt -a devhub -d
+    - name: Create Scratch org
+      shell: bash
+      run: sf org create scratch -d -f config/validation-scratch.json -a scratch-validate --duration-days 1 --no-track-source --wait 30
+    - name: Validate Metadata
+      shell: bash
+      run: sf project deploy start --dry-run -d packages/core --target-org scratch-validate
